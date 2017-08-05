@@ -5,7 +5,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/goinaction/code/chapter7/patterns/runner"
+	"github.com/hongmaoxiao/go_example/runner"
 )
 
 const timeout = 3 * time.Second
@@ -31,7 +31,7 @@ func main() {
 	log.Println("Process ended.")
 }
 
-func createTask() func(id) {
+func createTask() func(int) {
 	return func(id int) {
 		log.Printf("Processor - Task #%d.", id)
 		time.Sleep(time.Duration(id) * time.Second)
