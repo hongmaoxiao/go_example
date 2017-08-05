@@ -34,13 +34,13 @@ func (r *Runner) Start() error {
 
 	go func() {
 		r.complete <- r.run()
-	}
+	}()
 
 	select {
 	case err := <-r.complete:
 		return err
 
-	case <- r.timeout:
+	case <-r.timeout:
 		return ErrTimeout
 	}
 }
@@ -59,12 +59,10 @@ func (r *Runner) run() error {
 
 func (r *Runner) gotInterrupt() bool {
 	select {
-	case <- r.interrupt:
+	case <-r.interrupt:
 		signal.Stop(r.interrupt)
 		return true
 	default:
 		return false
 	}
 }
-
-
