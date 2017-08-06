@@ -1,8 +1,9 @@
 package main
 
 import (
-	"fmt"
+	"errors"
 	"io"
+	"log"
 	"sync"
 )
 
@@ -21,8 +22,8 @@ func New(fn func() (io.Closer, error), size uint) (*Pool, error) {
 	}
 
 	return &Pool{
-		factory: fn,
-		resources: make(chan io.Closer, size)
+		factory:   fn,
+		resources: make(chan io.Closer, size),
 	}, nil
 }
 
