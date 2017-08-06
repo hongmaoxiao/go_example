@@ -13,12 +13,12 @@ type Pool struct {
 
 func New(maxGoroutines int) *Pool {
 	p := Pool{
-		work: make(chan Worker)
+		work: make(chan Worker),
 	}
 
 	p.wg.Add(maxGoroutines)
-	for i := 0;i < maxGoroutines; i++ {
-		go func(){
+	for i := 0; i < maxGoroutines; i++ {
+		go func() {
 			for w := range p.work {
 				w.Task()
 			}
