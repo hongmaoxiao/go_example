@@ -34,6 +34,7 @@ func createConnection() (io.Closer, error) {
 
 	return &dbConnection{id}, nil
 }
+
 func main() {
 	var wg sync.WaitGroup
 	wg.Add(maxGoroutines)
